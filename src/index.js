@@ -1,11 +1,7 @@
-// The jsxgraph@1.5.0-rc2 does not actually export granular objects.
 export * from 'jsxgraph';
 
 import JXG from 'jsxgraph';
 export default JXG;
-
-// The following "Hack" is used to restore granular objects.
-// This is consistent with 1.4.x.
 
 // Values
 export const COORDS_BY_SCREEN = JXG.COORDS_BY_SCREEN;
@@ -71,7 +67,7 @@ export const evaluate = JXG.evaluate;
 export const filterElements = JXG.filterElements;
 export const getBoardByContainerId = JXG.getBoardByContainerId;
 export const getCSSTransformMatrix = JXG.getCSSTransformMatrix;
-export const getCSSTransform = JXG.getCSSTrasform; // BUG????
+export const getCSSTransform = JXG.getCSSTransform;
 export const getDimensions = JXG.getDimensions;
 export const getOffset = JXG.getOffset;
 export const getPosition = JXG.getPosition;
