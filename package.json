@@ -11,18 +11,9 @@
     "module": "./esm/es2015/index.min.js",
     "type": "module",
     "scripts": {
-        "test": "pnpm run build && concurrently -n w: 'pnpm:test:*'",
-        "test:browser": "karma start karma.conf.cjs --single-run",
-        "debug:test:browser": "karma start karma.conf.cjs",
-        "test:unit": "mocha -r chai/register-expect 'node-test/**/*.*'",
-        "test:formatting": "prettier --check .",
         "build": "npm run clean && rollup --config rollup.config.mjs",
         "clean": "rm -rf esm && rm -rf system",
-        "format": "prettier --write .",
-        "release": "release-it",
-        "prepublishOnly": "pnpm run build && pinst --disable",
-        "postinstall": "husky install",
-        "postpublish": "pinst --enable"
+        "prepublishOnly": "pnpm run build && pinst --disable"
     },
     "files": [
         "esm",
@@ -49,18 +40,6 @@
         "@rollup/plugin-json": "6.0.0",
         "@rollup/plugin-node-resolve": "15.0.1",
         "@rollup/plugin-terser": "0.3.0",
-        "chai": "4.3.7",
-        "concurrently": "7.6.0",
-        "husky": "8.0.3",
-        "karma": "6.4.1",
-        "karma-firefox-launcher": "2.1.2",
-        "karma-jasmine": "5.1.0",
-        "mocha": "10.2.0",
-        "pinst": "3.0.0",
-        "prettier": "2.8.2",
-        "pretty-quick": "3.1.3",
-        "release-it": "15.6.0",
-        "release-it-plugin-esm-bundle": "3.0.0",
         "rollup": "3.10.0"
     }
 }

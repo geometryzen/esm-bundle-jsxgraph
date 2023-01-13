@@ -48,6 +48,18 @@ function createConfig(format, target, minify) {
                 banner,
             }
         ],
+        onwarn(warning, warn) {
+            // skip certain warnings
+            if (warning.code === 'EVAL') return;
+
+            // throw on others
+            // Using Object.assign over new Error(warning.message) will make the CLI
+            // print additional information such as warning location and help url.
+            // if (warning.code === 'MISSING_EXPORT') throw Object.assign(new Error(), warning);
+
+            // Use default for everything else
+            warn(warning);
+        },
         plugins
     };
 }
