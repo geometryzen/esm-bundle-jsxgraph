@@ -5,7 +5,7 @@ import packageJson from './package.json' assert { type: 'json' };
 
 const dependencyPkgName = "jsxgraph";
 const dependencyVersion = /[0-9.]+$/.exec(
-    packageJson.devDependencies[dependencyPkgName]
+    packageJson.dependencies[dependencyPkgName]
 )[0];
 
 /**
