@@ -50,7 +50,6 @@
         "jest": "^29.3.1",
         "pinst": "^3.0.0",
         "release-it": "^15.6.0",
-        "release-it-plugin-esm-bundle": "^3.0.0",
         "rollup": "^3.10.0",
         "ts-jest": "^29.0.5",
         "ts-jest-resolver": "^2.0.0",

@@ -60,12 +60,12 @@ function createConfig(format, target, minify) {
 }
 
 export default [
-    //    createConfig("module", "es5", false),
-    //    createConfig("module", "es2015", false),
-    //    createConfig("module", "es5", true),
+    createConfig("module", "es5", false),
+    createConfig("module", "es2015", false),
+    createConfig("module", "es5", true),
     createConfig("module", "es2015", true),
-    //    createConfig("system", "es5", false),
-    //    createConfig("system", "es2015", false),
-    //    createConfig("system", "es5", true),
+    createConfig("system", "es5", false),
+    createConfig("system", "es2015", false),
+    createConfig("system", "es5", true),
     createConfig("system", "es2015", true),
 ];
