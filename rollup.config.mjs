@@ -1,3 +1,4 @@
+import commonjs from "@rollup/plugin-commonjs";
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
@@ -19,6 +20,7 @@ function createConfig(format, target, minify) {
         resolve({
             exportConditions: target === "es2015" ? ["es2015"] : undefined,
         }),
+        commonjs(),
         typescript({ tsconfig: './tsconfig.json' })
     ];
     if (minify) {
