@@ -13,9 +13,8 @@ const dependencyVersion = semverRegEx.exec(
 )[0];
 
 /**
- * @param format Either 'module' or 'system'.
- * @param target Either 'es2015' or 'es2016'
- * @returns 
+ * @param format Determines whether to generate EcmaScript or System format.
+ * @param target Determines the JavaScript version.
  */
 function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' | 'es2015', minify: boolean): RollupOptions {
     const configDir = (format === "module" ? "esm" : format) + "/" + target;
@@ -36,7 +35,7 @@ function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' |
     }
     const banner = `/**
  * ${packageJson.name}@${packageJson.version} is a bundled "${format}" format for ${dependencyPkgName}@${dependencyVersion}
- * © 2023-2023 ${packageJson.author}
+ * © 2023 ${packageJson.author}
  * Released under the ${packageJson.license} License.
  */
 `.trim();
@@ -71,5 +70,6 @@ export default [
     // Keep the number of builds to a minimum to avoid JavaScript heap out of memory issues in GitHub Actions.
     createConfig("module", "es2022", true),
     createConfig("system", "es2022", true),
-    createConfig("system", "es2022", false),
+    // We're no using the minified vesion.
+    // createConfig("system", "es2022", false),
 ];
