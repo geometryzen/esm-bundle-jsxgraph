@@ -1,6 +1,5 @@
-import { Board } from "../src/index.js";
+import { Board } from "../src/index";
 
 test("Board", function () {
-    expect(true).toBe(true);
-    expect(typeof Board).toBe("Hello, World!");
+    expect(typeof Board === 'function').toBe(true);
 });

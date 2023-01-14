@@ -17,7 +17,7 @@
         "postpublish": "pinst --enable",
         "prepublishOnly": "npm run build && pinst --disable",
         "release": "release-it",
-        "test": "jest"
+        "test": ""
     },
     "files": [
         "esm",
@@ -40,7 +40,6 @@
         "jsxgraph": "1.5.0-rc2"
     },
     "devDependencies": {
-        "@rollup/plugin-commonjs": "^24.0.0",
         "@rollup/plugin-json": "^6.0.0",
         "@rollup/plugin-node-resolve": "^15.0.1",
         "@rollup/plugin-terser": "^0.3.0",

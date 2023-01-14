@@ -1,4 +1,3 @@
-import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
@@ -20,14 +19,13 @@ function createConfig(format, target, minify) {
         resolve({
             exportConditions: target === "es2015" ? ["es2015"] : undefined,
         }),
-        commonjs(),
         typescript({ tsconfig: './tsconfig.json' })
     ];
     if (minify) {
         plugins.push(terser());
     }
     const banner = `/**
- * ${packageJson.name}@${packageJson.version} is a "${format}" format for ${dependencyPkgName}@${dependencyVersion}
+ * ${packageJson.name}@${packageJson.version} is a bundled "${format}" format for ${dependencyPkgName}@${dependencyVersion}
  * © 2023-2023 ${packageJson.author}
  * Released under the ${packageJson.license} License.
  */
@@ -60,12 +58,12 @@ function createConfig(format, target, minify) {
 }
 
 export default [
-    createConfig("module", "es5", false),
-    createConfig("module", "es2015", false),
-    createConfig("module", "es5", true),
+    //    createConfig("module", "es5", false),
+    //    createConfig("module", "es2015", false),
+    //    createConfig("module", "es5", true),
     createConfig("module", "es2015", true),
-    createConfig("system", "es5", false),
-    createConfig("system", "es2015", false),
-    createConfig("system", "es5", true),
+    //    createConfig("system", "es5", false),
+    //    createConfig("system", "es2015", false),
+    //    createConfig("system", "es5", true),
     createConfig("system", "es2015", true),
 ];
