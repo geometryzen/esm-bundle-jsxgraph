@@ -3,11 +3,11 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import { RollupOptions, RollupWarning, WarningHandler } from 'rollup';
+import cleanup from 'rollup-plugin-cleanup';
 import packageJson from './package.json' assert { type: 'json' };
 
 const dependencyPkgName = "jsxgraph";
 const semverRegEx = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([\da-z-]+(?:\.[\da-z-]+)*))?(\+[\da-z-]+)?$/i;
-// TODO: This doesn't capture the version correctly for release candidates e.g. major.minor.patch-candidate.
 const dependencyVersion = semverRegEx.exec(
     packageJson.dependencies[dependencyPkgName]
 )[0];
@@ -28,7 +28,8 @@ function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' |
         typescript({
             tsconfig: './tsconfig.json',
             target  // I'm not sure if this is really doing what I want (override tsconfig.json).
-        })
+        }),
+        cleanup()
     ];
     if (minify) {
         plugins.push(terser());
@@ -67,12 +68,8 @@ function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' |
 }
 
 export default [
+    // Keep the number of builds to a minimum to avoid JavaScript heap out of memory issues in GitHub Actions.
     createConfig("module", "es2022", true),
-    createConfig("module", "es2022", false),
-    createConfig("module", "es2016", true),
-    createConfig("module", "es2015", true),
     createConfig("system", "es2022", true),
     createConfig("system", "es2022", false),
-    createConfig("system", "es2016", true),
-    createConfig("system", "es2015", true),    
 ];
