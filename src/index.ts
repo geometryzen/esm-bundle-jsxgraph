@@ -1,4 +1,5 @@
-export * from 'jsxgraph';
+// Can't use export * when using export =
+// export * from 'jsxgraph';
 
 import JXG from 'jsxgraph';
 export default JXG;
@@ -67,7 +68,7 @@ export const evaluate = JXG.evaluate;
 export const filterElements = JXG.filterElements;
 export const getBoardByContainerId = JXG.getBoardByContainerId;
 export const getCSSTransformMatrix = JXG.getCSSTransformMatrix;
-export const getCSSTransform = JXG.getCSSTransform;
+export const getCSSTransform = (JXG as any).getCSSTransform; // TODO: This should be fixed in 1.5.0-rc3
 export const getDimensions = JXG.getDimensions;
 export const getOffset = JXG.getOffset;
 export const getPosition = JXG.getPosition;

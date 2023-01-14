@@ -1,6 +1,7 @@
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 import packageJson from './package.json' assert { type: 'json' };
 
 const dependencyPkgName = "jsxgraph";
@@ -19,32 +20,26 @@ function createConfig(format, target, minify) {
         resolve({
             exportConditions: target === "es2015" ? ["es2015"] : undefined,
         }),
-        commonjs()
+        commonjs(),
+        typescript({ tsconfig: './tsconfig.json' })
     ];
     if (minify) {
         plugins.push(terser());
     }
     const banner = `/**
  * ${packageJson.name}@${packageJson.version} is a "${format}" format for ${dependencyPkgName}@${dependencyVersion}
- * © 2023 ${packageJson.author}
+ * © 2023-2023 ${packageJson.author}
  * Released under the ${packageJson.license} License.
  */
 `.trim();
 
     return {
-        input: {
-            // The key, "name", is used to generate the output file folder and file name in conjunction with entryFileNames.
-            // The value is the path to the source code.
-            "index": "./src/index.js",
-        },
+        input: "./src/index.ts",
         output: [
             {
-                // Placing the output in a "dist" folder makes it easier to clean up, but is also a bit less elegant to consume.
-                dir: `${configDir}`,
-                entryFileNames: `[name]${minify ? ".min" : ""}.js`,
-                chunkFileNames: `shared${minify ? ".min" : ""}.js`,
+                file: `./${configDir}/index${minify ? ".min" : ""}.js`,
                 format,
-                // sourcemap: true,
+                sourcemap: true,
                 banner,
             }
         ],
@@ -67,10 +62,10 @@ function createConfig(format, target, minify) {
 export default [
     createConfig("module", "es5", false),
     createConfig("module", "es2015", false),
-    createConfig("system", "es5", false),
-    createConfig("system", "es2015", false),
     createConfig("module", "es5", true),
     createConfig("module", "es2015", true),
+    createConfig("system", "es5", false),
+    createConfig("system", "es2015", false),
     createConfig("system", "es5", true),
     createConfig("system", "es2015", true),
 ];
