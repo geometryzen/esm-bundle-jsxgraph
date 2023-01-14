@@ -22,7 +22,7 @@ jobs:
     env:
       # used by 'release-it'
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      GITHUB_TOKEN: ${{ secrets.PUBLISH_BOT }}
+      GITHUB_TOKEN: ${{ secrets.PUBLISH_BOT_ACCESS_TOKEN }}
       # used manually in setting git config
       BOT_EMAIL: ${{ secrets.PUBLISH_BOT_EMAIL }}
       # used by unit tests
@@ -34,7 +34,7 @@ jobs:
         with:
           # Use our own token instead of the default token
           # this step persists login credentials so strongly that we couldn't get them to override
-          token: ${{ secrets.PUBLISH_BOT }}
+          token: ${{ secrets.PUBLISH_BOT_ACCESS_TOKEN }}
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
