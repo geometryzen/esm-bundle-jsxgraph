@@ -2,10 +2,13 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
+import { RollupOptions, RollupWarning, WarningHandler } from 'rollup';
 import packageJson from './package.json' assert { type: 'json' };
 
 const dependencyPkgName = "jsxgraph";
-const dependencyVersion = /[0-9.]+$/.exec(
+const semverRegEx = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([\da-z-]+(?:\.[\da-z-]+)*))?(\+[\da-z-]+)?$/i;
+// TODO: This doesn't capture the version correctly for release candidates e.g. major.minor.patch-candidate.
+const dependencyVersion = semverRegEx.exec(
     packageJson.dependencies[dependencyPkgName]
 )[0];
 
@@ -14,7 +17,7 @@ const dependencyVersion = /[0-9.]+$/.exec(
  * @param target Either 'es2015' or 'es2016'
  * @returns 
  */
-function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' | 'es2015', minify: boolean) {
+function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' | 'es2015', minify: boolean): RollupOptions {
     const configDir = (format === "module" ? "esm" : format) + "/" + target;
     const plugins = [
         resolve({
@@ -47,7 +50,7 @@ function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' |
                 banner,
             }
         ],
-        onwarn(warning: { code: string }, warn: (warning: { code: string }) => void) {
+        onwarn(warning: RollupWarning, warn: WarningHandler) {
             // skip certain warnings
             if (warning.code === 'EVAL') return;
 
@@ -65,9 +68,11 @@ function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' |
 
 export default [
     createConfig("module", "es2022", true),
+    createConfig("module", "es2022", false),
     createConfig("module", "es2016", true),
     createConfig("module", "es2015", true),
     createConfig("system", "es2022", true),
+    createConfig("system", "es2022", false),
     createConfig("system", "es2016", true),
-    createConfig("system", "es2015", true),
+    createConfig("system", "es2015", true),    
 ];
