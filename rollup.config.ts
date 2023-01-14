@@ -11,17 +11,21 @@ const dependencyVersion = /[0-9.]+$/.exec(
 
 /**
  * @param format Either 'module' or 'system'.
- * @param target Either 'es5' or 'es2015'
+ * @param target Either 'es2015' or 'es2016'
  * @returns 
  */
-function createConfig(format, target, minify) {
+function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' | 'es2015', minify: boolean) {
     const configDir = (format === "module" ? "esm" : format) + "/" + target;
     const plugins = [
         resolve({
-            exportConditions: target === "es2015" ? ["es2015"] : undefined,
+            // Adding conditions that change the exports resolution isn't really doing anything in this case.
+            exportConditions: [target],
         }),
         commonjs(),
-        typescript({ tsconfig: './tsconfig.json' })
+        typescript({
+            tsconfig: './tsconfig.json',
+            target  // I'm not sure if this is really doing what I want (override tsconfig.json).
+        })
     ];
     if (minify) {
         plugins.push(terser());
@@ -43,7 +47,7 @@ function createConfig(format, target, minify) {
                 banner,
             }
         ],
-        onwarn(warning, warn) {
+        onwarn(warning: { code: string }, warn: (warning: { code: string }) => void) {
             // skip certain warnings
             if (warning.code === 'EVAL') return;
 
@@ -60,12 +64,10 @@ function createConfig(format, target, minify) {
 }
 
 export default [
-    createConfig("module", "es5", false),
-    createConfig("module", "es2015", false),
-    createConfig("module", "es5", true),
+    createConfig("module", "es2022", true),
+    createConfig("module", "es2016", true),
     createConfig("module", "es2015", true),
-    createConfig("system", "es5", false),
-    createConfig("system", "es2015", false),
-    createConfig("system", "es5", true),
+    createConfig("system", "es2022", true),
+    createConfig("system", "es2016", true),
     createConfig("system", "es2015", true),
 ];

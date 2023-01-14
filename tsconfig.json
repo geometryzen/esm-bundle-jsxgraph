@@ -14,10 +14,12 @@
         "noUnusedLocals": true,
         "noUnusedParameters": false,
         "noImplicitReturns": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "resolveJsonModule": true
     },
     "include": [
-        "./src/**/*.ts"
+        "./src/**/*.ts",
+        "rollup.config.ts"
     ],
     "exclude": [
         "node_modules"

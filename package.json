@@ -4,20 +4,20 @@
     "description": "EcmaScript and System module format bundles of jsxgraph",
     "exports": {
         ".": {
-            "system": "./system/es2015/index.min.js",
-            "default": "./esm/es2015/index.min.js"
+            "system": "./system/es2022/index.min.js",
+            "default": "./esm/es2022/index.min.js"
         }
     },
-    "module": "./esm/es2015/index.min.js",
+    "module": "./esm/es2022/index.min.js",
     "type": "module",
     "scripts": {
-        "build": "npm run clean && rollup --config rollup.config.mjs",
+        "build": "npm run clean && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
         "clean": "rm -rf esm && rm -rf system",
         "postinstall": "husky install",
         "postpublish": "pinst --enable",
         "prepublishOnly": "npm run build && pinst --disable",
         "release": "release-it",
-        "test": "pnpm run build"
+        "test": "npm run build"
     },
     "files": [
         "esm",
