@@ -1,6 +1,6 @@
 {
     "name": "@geometryzen/jsxgraph",
-    "version": "1.5.0-rc2",
+    "version": "1.5.0",
     "description": "EcmaScript and System module format bundles of jsxgraph",
     "exports": {
         ".": {
@@ -17,7 +17,7 @@
         "postpublish": "pinst --enable",
         "prepublishOnly": "npm run build && pinst --disable",
         "release": "release-it",
-        "test": "npm run build"
+        "test": "build"
     },
     "files": [
         "esm",
@@ -37,21 +37,21 @@
     },
     "homepage": "https://github.com/geometryzen/esm-bundle-jsxgraph#readme",
     "dependencies": {
-        "jsxgraph": "1.5.0-rc2"
+        "jsxgraph": "1.5.0"
     },
     "devDependencies": {
         "@geometryzen/release-it-plugin-esm-bundle": "0.0.3",
-        "@rollup/plugin-commonjs": "^24.0.0",
+        "@rollup/plugin-commonjs": "^24.0.1",
         "@rollup/plugin-json": "^6.0.0",
         "@rollup/plugin-node-resolve": "^15.0.1",
-        "@rollup/plugin-terser": "^0.3.0",
+        "@rollup/plugin-terser": "^0.4.0",
         "@rollup/plugin-typescript": "^11.0.0",
-        "@types/jest": "^29.2.5",
+        "@types/jest": "^29.4.0",
         "husky": "^8.0.3",
-        "jest": "^29.3.1",
+        "jest": "^29.4.1",
         "pinst": "^3.0.0",
         "release-it": "^15.6.0",
-        "rollup": "^3.10.0",
+        "rollup": "^3.11.0",
         "rollup-plugin-cleanup": "^3.2.1",
         "ts-jest": "^29.0.5",
         "ts-jest-resolver": "^2.0.0",
