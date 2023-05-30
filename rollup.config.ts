@@ -70,6 +70,4 @@ export default [
     // Keep the number of builds to a minimum to avoid JavaScript heap out of memory issues in GitHub Actions.
     createConfig("module", "es2022", true),
     createConfig("system", "es2022", true),
-    // We're no using the minified vesion.
-    // createConfig("system", "es2022", false),
 ];
