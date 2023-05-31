@@ -1,21 +1,21 @@
 {
     "name": "@geometryzen/jsxgraph",
-    "version": "1.5.0",
+    "version": "1.5.2",
     "description": "EcmaScript and System module format bundles of jsxgraph",
     "exports": {
         ".": {
             "system": "./system/es2022/index.min.js",
-            "types": "./esm/es2022/index.d.ts",
+            "types": "./types/index.d.ts",
             "default": "./esm/es2022/index.min.js"
         }
     },
     "module": "./esm/es2022/index.min.js",
-    "types": "./esm/es2022/index.d.ts",
+    "types": "./types/index.d.ts",
     "type": "module",
     "scripts": {
         "build": "npm run clean && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript && cp ./node_modules/jsxgraph/distrib/index.d.ts ./esm/es2022/index.d.ts",
         "clean": "rm -rf esm && rm -rf system",
-        "postinstall": "husky install",
+        "_postinstall": "husky install",
         "postpublish": "pinst --enable",
         "prepublishOnly": "npm run build && pinst --disable",
         "release": "release-it",
