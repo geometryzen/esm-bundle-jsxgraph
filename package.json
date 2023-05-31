@@ -15,7 +15,7 @@
     "scripts": {
         "build": "npm run clean && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript && cp ./node_modules/jsxgraph/distrib/index.d.ts ./esm/es2022/index.d.ts",
         "clean": "rm -rf esm && rm -rf system",
-        "_postinstall": "husky install",
+        "postinstall": "husky install",
         "postpublish": "pinst --enable",
         "prepublishOnly": "npm run build && pinst --disable",
         "release": "release-it",
@@ -23,7 +23,8 @@
     },
     "files": [
         "esm",
-        "system"
+        "system",
+        "types"
     ],
     "repository": {
         "type": "git",
