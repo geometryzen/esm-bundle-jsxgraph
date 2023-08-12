@@ -1,6 +1,6 @@
 {
     "name": "@geometryzen/jsxgraph",
-    "version": "1.6.1347",
+    "version": "1.6.1348",
     "description": "EcmaScript and System module format bundles of jsxgraph",
     "exports": {
         ".": {
