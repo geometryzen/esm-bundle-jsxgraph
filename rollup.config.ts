@@ -2,7 +2,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
-import { LoggingFunction, RollupOptions, RollupWarning } from 'rollup';
+import { LoggingFunction, RollupLog, RollupOptions } from 'rollup';
 import cleanup from 'rollup-plugin-cleanup';
 import packageJson from './package.json' assert { type: 'json' };
 
@@ -50,7 +50,7 @@ function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' |
                 banner,
             }
         ],
-        onwarn(warning: RollupWarning, warn: LoggingFunction) {
+        onwarn(warning: RollupLog, warn: LoggingFunction) {
             // skip certain warnings
             if (warning.code === 'EVAL') return;
 
