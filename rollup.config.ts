@@ -15,8 +15,9 @@ const dependencyVersion = semverRegEx.exec(
 /**
  * @param format Determines whether to generate EcmaScript or System format.
  * @param target Determines the JavaScript version.
+ * @param minify Determines whether the output will be compressed.
  */
-function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' | 'es2015', minify: boolean): RollupOptions {
+function createConfig(format: 'module' | 'system', target: 'esnext', minify: boolean): RollupOptions {
     const configDir = (format === "module" ? "esm" : format) + "/" + target;
     const plugins = [
         resolve({
@@ -35,7 +36,7 @@ function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' |
     }
     const banner = `/**
  * ${packageJson.name}@${packageJson.version} is a bundled "${format}" format for ${dependencyPkgName}@${dependencyVersion}
- * © 2023 ${packageJson.author}
+ * © 2023-2024 ${packageJson.author}
  * Released under the ${packageJson.license} License.
  */
 `.trim();
@@ -68,6 +69,8 @@ function createConfig(format: 'module' | 'system', target: 'es2022' | 'es2016' |
 
 export default [
     // Keep the number of builds to a minimum to avoid JavaScript heap out of memory issues in GitHub Actions.
-    createConfig("module", "es2022", true),
-    createConfig("system", "es2022", true),
+    createConfig("module", "esnext", true),
+    createConfig("module", "esnext", false),
+    createConfig("system", "esnext", true),
+    createConfig("system", "esnext", false),
 ];
