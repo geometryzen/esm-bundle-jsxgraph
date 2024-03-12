@@ -4,7 +4,7 @@
 import JXG from 'jsxgraph';
 export default JXG;
 
-// Values
+// Values (10)
 export const COORDS_BY_SCREEN = JXG.COORDS_BY_SCREEN;
 export const COORDS_BY_USER = JXG.COORDS_BY_USER;
 export const Dump = JXG.Dump;
@@ -16,7 +16,7 @@ export const elements = JXG.elements;
 export const palette = JXG.palette;
 export const paletteWong = JXG.paletteWong;
 
-// Classes
+// Classes (20)
 export const Board = JXG.Board;
 export const Chart = JXG.Chart;
 export const Circle = JXG.Circle;
@@ -38,7 +38,7 @@ export const Transformation = JXG.Transformation;
 export const Turtle = JXG.Turtle;
 export const View3D = JXG.View3D;
 
-// Functions
+// Functions (92)
 export const LMS2rgb = JXG.LMS2rgb;
 export const addEvent = JXG.addEvent;
 export const autoDigits = JXG.autoDigits;
@@ -68,7 +68,7 @@ export const evaluate = JXG.evaluate;
 export const filterElements = JXG.filterElements;
 export const getBoardByContainerId = JXG.getBoardByContainerId;
 export const getCSSTransformMatrix = JXG.getCSSTransformMatrix;
-export const getCSSTransform = (JXG as any).getCSSTransform; // TODO: This should be fixed in 1.5.0-rc3
+export const getCSSTransform = JXG.getCSSTransform;
 export const getDimensions = JXG.getDimensions;
 export const getOffset = JXG.getOffset;
 export const getPosition = JXG.getPosition;
